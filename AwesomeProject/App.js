@@ -2,14 +2,14 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import RNGestureHandlerModule from 'react-native-gesture-handler';
-import Authorization from './screens/Authorization'; // Используем правильный путь к компоненту Authorization
-import HomeScreen from './screens/HomeScreen'; // Используем правильный путь к компоненту HomeScreen
+import Authorization from './screens/Authorization'; // 
+import HomeScreen from './screens/HomeScreen'; //
 
 const Stack = createStackNavigator();
 
 function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer> 
       <Stack.Navigator>
         <Stack.Screen
           name="Authorization"
