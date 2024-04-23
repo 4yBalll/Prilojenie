@@ -26,8 +26,11 @@ const HomeScreen = () => {
           <Text style={styles.detail}>IP Address: {ipData.ip}</Text>
           <Text style={styles.detail}>Country: {ipData.country}</Text>
           <Text style={styles.detail}>Region: {ipData.region}</Text>
+          <Text style={styles.detail}>region code: {ipData.region_code}</Text>
           <Text style={styles.detail}>City: {ipData.city}</Text>
-          <Text style={styles.detail}>ISP: {ipData.isp}</Text>
+          <Text style={styles.detail}>postal: {ipData.postal}</Text>
+          <Text style={styles.detail}>calling_code: {ipData.calling_code}</Text>
+          <Text style={styles.detail}>capital: {ipData.capital}</Text>
         </View>
       )}
       <TouchableOpacity style={styles.button} onPress={fetchIpData}>
