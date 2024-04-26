@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import RNGestureHandlerModule from 'react-native-gesture-handler';
 
 const Authorization = ({ onAuthorized, navigation }) => {
   const [username, setUsername] = useState('');
