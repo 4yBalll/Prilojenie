@@ -36,7 +36,7 @@ const HomeScreen = ({ ipData, ipDataReceived }) => {
             <Text style={styles.detail}>Region: {ipData.region}</Text>
             <Text style={styles.detail}>City: {ipData.city}</Text>
             <Text style={styles.detail}>Postal Code: {ipData.postal}</Text>
-            <Text style={styles.detail}>Calling Code: {ipData.country_calling_code}</Text>
+            <Text style={styles.detail}>Calling Code: {ipData.calling_code}</Text>
             <Text style={styles.detail}>Capital: {ipData.capital}</Text>
           </View>
         )
