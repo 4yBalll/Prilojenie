@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
+import { ipDataReceived } from './actions';
 
-const HomeScreen = () => {
-  const [ipData, setIpData] = useState(null);
-
+const HomeScreen = ({ ipData, ipDataReceived }) => {
   useEffect(() => {
     fetchIpData();
   }, []);
@@ -12,7 +12,7 @@ const HomeScreen = () => {
     try {
       const response = await fetch('http://ipwho.is/');
       const data = await response.json();
-      setIpData(data);
+      ipDataReceived(data); // Отправляем данные в Redux store
     } catch (error) {
       console.error(error);
     }
@@ -26,11 +26,11 @@ const HomeScreen = () => {
           <Text style={styles.detail}>IP Address: {ipData.ip}</Text>
           <Text style={styles.detail}>Country: {ipData.country}</Text>
           <Text style={styles.detail}>Region: {ipData.region}</Text>
-          <Text style={styles.detail}>region code: {ipData.region_code}</Text>
+          <Text style={styles.detail}>Region Code: {ipData.region_code}</Text>
           <Text style={styles.detail}>City: {ipData.city}</Text>
-          <Text style={styles.detail}>postal: {ipData.postal}</Text>
-          <Text style={styles.detail}>calling_code: {ipData.calling_code}</Text>
-          <Text style={styles.detail}>capital: {ipData.capital}</Text>
+          <Text style={styles.detail}>Postal Code: {ipData.postal}</Text>
+          <Text style={styles.detail}>Calling Code: {ipData.calling_code}</Text>
+          <Text style={styles.detail}>Capital: {ipData.capital}</Text>
         </View>
       )}
       <TouchableOpacity style={styles.button} onPress={fetchIpData}>
@@ -39,6 +39,14 @@ const HomeScreen = () => {
     </View>
   );
 };
+
+const mapStateToProps = (state) => ({
+  ipData: state.ipData, // Получаем данные из Redux store
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  ipDataReceived: (ipData) => dispatch(ipDataReceived(ipData)), // Отправляем действие в Redux store
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -70,4 +78,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
