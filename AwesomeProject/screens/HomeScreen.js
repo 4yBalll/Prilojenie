@@ -15,7 +15,7 @@ const HomeScreen = ({ ipData, ipDataReceived }) => {
     try {
       const response = await fetch('http://ipwho.is/');
       const data = await response.json();
-      ipDataReceived(data); // Отправляем данные в Redux store
+      ipDataReceived(data); 
     } catch (error) {
       console.error(error);
     } finally {
@@ -49,11 +49,11 @@ const HomeScreen = ({ ipData, ipDataReceived }) => {
 };
 
 const mapStateToProps = (state) => ({
-  ipData: state.ipData, // Получаем данные из Redux store
+  ipData: state.ipData, 
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  ipDataReceived: (ipData) => dispatch(ipDataReceived(ipData)), // Отправляем действие в Redux store
+  ipDataReceived: (ipData) => dispatch(ipDataReceived(ipData)), 
 });
 
 const styles = StyleSheet.create({
