@@ -8,24 +8,20 @@ const Authorization = ({ onAuthorized, navigation }) => {
   const [error, setError] = useState('');
 
   const handleAuthorizationPress = () => { 
-    // Проверяем, что имя пользователя и пароль не пустые
+    
     if (username.trim() === '' || password.trim() === '') {
       setError('Введите логин и пароль');
     } else {
-      // Пример простой проверки
       if (username === '1234' && password === '1234') {
-        // Если данные верны, вызываем колбэк для авторизации
         if (onAuthorized) {
-          onAuthorized(username); // Передаем имя пользователя
+          onAuthorized(username); 
         }
-        // Или можно сразу перейти на другой экран
         if (navigation) {
           navigation.navigate('Home');
         } else {
           console.error('Navigation is undefined');
         }
       } else {
-        // Если данные не верны, выводим сообщение об ошибке
         setError('Неверный пароль');
       }
     }
