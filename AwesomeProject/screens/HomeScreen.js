@@ -1,37 +1,45 @@
-import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import { ipDataReceived } from './actions';
 
 const HomeScreen = ({ ipData, ipDataReceived }) => {
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     fetchIpData();
   }, []);
 
   const fetchIpData = async () => {
+    setLoading(true);
     try {
       const response = await fetch('http://ipwho.is/');
       const data = await response.json();
       ipDataReceived(data); // Отправляем данные в Redux store
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <View style={styles.container}>
-      {ipData && (
-        <View>
-          <Text style={styles.title}>IP Information</Text>
-          <Text style={styles.detail}>IP Address: {ipData.ip}</Text>
-          <Text style={styles.detail}>Country: {ipData.country}</Text>
-          <Text style={styles.detail}>Region: {ipData.region}</Text>
-          <Text style={styles.detail}>Region Code: {ipData.region_code}</Text>
-          <Text style={styles.detail}>City: {ipData.city}</Text>
-          <Text style={styles.detail}>Postal Code: {ipData.postal}</Text>
-          <Text style={styles.detail}>Calling Code: {ipData.calling_code}</Text>
-          <Text style={styles.detail}>Capital: {ipData.capital}</Text>
-        </View>
+      {loading ? (
+        <ActivityIndicator size="large" color="#007BFF" />
+      ) : (
+        ipData && (
+          <View>
+            <Text style={styles.title}>IP Information</Text>
+            <Text style={styles.detail}>IP Address: {ipData.ip}</Text>
+            <Text style={styles.detail}>Country: {ipData.country}</Text>
+            <Text style={styles.detail}>Region: {ipData.region}</Text>
+            <Text style={styles.detail}>City: {ipData.city}</Text>
+            <Text style={styles.detail}>Postal Code: {ipData.postal}</Text>
+            <Text style={styles.detail}>Calling Code: {ipData.country_calling_code}</Text>
+            <Text style={styles.detail}>Capital: {ipData.capital}</Text>
+          </View>
+        )
       )}
       <TouchableOpacity style={styles.button} onPress={fetchIpData}>
         <Text style={styles.buttonText}>Refresh</Text>

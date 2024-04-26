@@ -15,26 +15,26 @@ const reduxStore = configureStore({
   // Дополнительные параметры конфигурации, если необходимо
 });
 
-function App() {
+const App = () => {
   return (
     <Provider store={reduxStore}>
       {/* Оборачиваем приложение в Provider */}
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName="Authorization">
           <Stack.Screen
             name="Authorization"
             component={Authorization}
             options={{ title: 'Authorization' }}
           />
-          <Stack.Screen
+          <Stack.Screen 
             name="Home"
             component={HomeScreen}
-            options={{ title: 'Home' }}
+            options={{ title: 'Home' }} // мб убрать
           />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
   );
-}
+};
 
 export default App;

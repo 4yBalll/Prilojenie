@@ -5,38 +5,38 @@ import { IP_DATA_RECEIVED } from './actions';
 const initialIpData = null;
 
 // Редьюсер для данных одного пользователя
-function userReducer(state = initialIpData, action) {
+const userReducer = (state = initialIpData, action) => {
   switch (action.type) {
     case IP_DATA_RECEIVED:
       return action.payload; // Обновляем данные пользователя
     default:
       return state;
   }
-}
+};
 
 // Начальное состояние для корневого редьюсера
 const initialState = {
-  users: [],
+  userIpArray: [],
 };
 
 // Корневой редьюсер
-function rootReducer(state = initialState, action) {
+const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case IP_DATA_RECEIVED:
       // Добавляем новые данные пользователя в массив пользователей
-      const updatedIp = [...state.users, action.payload];
+      const updatedIp = [...state.userIpArray, action.payload];
       return {
         ...state,
-        users: updatedIp,
+        userIpArray: updatedIp,
       };
     default: 
       return state;
   }
-}
+};
 
 // Комбинированный редьюсер
 const combinedReducer = combineReducers({
-  currentUser: userReducer, // Редьюсер для текущего пользователя
+  ipData: userReducer, // Редьюсер для текущего пользователя
   appData: rootReducer, // Корневой редьюсер для приложения
 });
 
